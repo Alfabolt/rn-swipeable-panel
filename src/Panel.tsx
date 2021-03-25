@@ -3,6 +3,7 @@ import {
   StyleSheet,
   ScrollView,
   View,
+  Text,
   TouchableHighlight,
   TouchableWithoutFeedback,
   Animated,
@@ -38,6 +39,7 @@ type SwipeablePanelProps = {
   onlySmall?: boolean;
   openLarge?: boolean;
   noBar?: boolean;
+  renderHeader: ()=>object;
   barStyle?: object;
   allowTouchOutside?: boolean;
   scrollViewProps?: ScrollViewProps;
@@ -251,6 +253,11 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
           {this.props.showCloseButton && (
             <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.props.onClose} />
           )}
+          {
+            this.props.renderHeader? 
+              this.props.renderHeader()
+            : null
+          }
           <ScrollView
             onTouchStart={() => {
               return false;
